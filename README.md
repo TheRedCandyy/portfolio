@@ -1,2 +1,2 @@
 # portfolio
-    ![<3](images/travis_scott.gif)
+    ![<3](https://github.com/TheRedCandyy/portfolio/blob/main/images/travis_scott.gif)
