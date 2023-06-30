@@ -16,7 +16,7 @@ function Contacts() {
                        Drop me a message in any of the contacts bellow and I will answer as fast as possible! <img src={phone} alt="Phone" className="w-5 inline-block"/>
                     </p>
                 </div>
-                <div className="my-10 xl:m-0 mx-auto">
+                <div className="my-10 mx-auto">
                     <dl
                         className="space-y-10 md:space-y-0 grid md:grid-cols-2 lg:grid-cols-4 md:gap-x-2 md:gap-y-10">
                         <a href="https://www.linkedin.com/in/alexandre-tavares-15082a194/">
