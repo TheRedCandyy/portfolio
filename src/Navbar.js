@@ -9,13 +9,10 @@ const navigation = [
         href: '#aboutme',
     }, {
         name: 'Projects',
-        href: '#'
-    }, {
-        name: 'Near Future',
-        href: '#'
+        href: '#projects'
     }, {
         name: 'Contacts',
-        href: '#'
+        href: '#contacts'
     }
 ]
 
@@ -28,10 +25,8 @@ function Navbar() {
                     aria-label="Global">
                     <div className="flex items-center flex-grow flex-shrink-0 xl:flex-grow-0">
                         <div className="flex items-center justify-between w-full md:w-auto">
-                            <a href="#">
-                                <span className="sr-only">Workflow</span>
-                                <img className="h-8 w-auto sm:h-10" src={logo} alt=""/>
-                            </a>
+                            <span className="sr-only">Workflow</span>
+                            <img className="h-8 w-auto sm:h-10" src={logo} alt=""/>
                             <div className="-mr-2 flex items-center md:hidden">
                                 <Popover.Button
                                     className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500">

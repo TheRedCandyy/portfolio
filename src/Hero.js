@@ -30,7 +30,7 @@ function Hero() {
                                 </h1>
                                 <p
                                     className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl xl:mx-0">
-                                    I'm a web developer based in Portugal.
+                                    I'm a web developer based in Lisbon, Portugal.
                                     <img alt="PT" className="ml-2 h-8 w-auto sm:h-10  inline-block pb-2" src={flag_portugal}/>
                                 </p>
                             </div>

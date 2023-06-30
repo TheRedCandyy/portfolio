@@ -1,9 +1,9 @@
-import { FaHtml5, FaJs, FaCss3Alt, FaPhp, FaLaravel, FaReact, FaBootstrap } from "react-icons/fa";
+import { FaHtml5, FaJs, FaCss3Alt, FaPhp, FaLaravel, FaReact, FaSalesforce } from "react-icons/fa";
 import { SiTailwindcss } from 'react-icons/si'
 
 function AboutMe() {
     return (
-        <div id="aboutme" name="AboutMe" className="py-12 bg-white md:h-screen" data-aos="fade-right">
+        <div id="aboutme" name="AboutMe" className="py-12 bg-white md:mb-36" data-aos="fade-right">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 xl:px-8">
             <hr className='lg:hidden mb-10'/>
                 <div className="xl:text-center">
@@ -94,9 +94,9 @@ function AboutMe() {
                             <dt>
                                 <div
                                     className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-br from-indigo-500 to-indigo-800 text-white">
-                                    <FaBootstrap></FaBootstrap>
+                                    <FaSalesforce></FaSalesforce>
                                 </div>
-                                <p className="ml-16 text-lg leading-10 font-medium text-gray-900">Bootstrap</p>
+                                <p className="ml-16 text-lg leading-10 font-medium text-gray-900">SFCC</p>
                             </dt>
                         </div>
                     </dl>

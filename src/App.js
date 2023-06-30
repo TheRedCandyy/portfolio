@@ -1,9 +1,11 @@
 import './App.css'
 import AOS from "aos";
 import "aos/dist/aos.css";
-import React, {Fragment, useEffect } from 'react'
+import React, {useEffect} from 'react'
 import AboutMe from './AboutMe'
 import Hero from './Hero'
+import Projects from './Projects';
+import Contacts from './Contacts';
 
 export default App
 
@@ -16,6 +18,8 @@ function App() {
         <div>
             <Hero/>
             <AboutMe/>
+            <Projects/>
+            <Contacts/>
         </div>
     )
 }
