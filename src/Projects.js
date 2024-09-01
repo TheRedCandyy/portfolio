@@ -1,11 +1,13 @@
 import sadEmoji from './sademoji.webp'
 import splitterApp from './splitter_app.png'
 import crypto from './crypto.png'
+import adviceGenerator from './advice-generator.png'
+import giphyProject from './giphy-project.png'
 import { FaGithubSquare } from 'react-icons/fa'
 
 function Projects () {
     return (
-        <div id="projects" name="Projects" className="py-12 bg-white md:h-screen" data-aos="fade-right">
+        <div id="projects" name="Projects" className="py-12 bg-white" data-aos="fade-right">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 xl:px-8">
             <hr className='lg:hidden mb-10'/>
                 <div className="xl:text-center">
@@ -27,6 +29,20 @@ function Projects () {
                             <a target="_blank" rel="noreferrer" href="https://theredcandyy.github.io/frontendmentor_solutions/nft-preview-card-component-main/index.html">
                                 <center><img src={crypto} alt="NFT Display Card" className='h-72 '/></center>
                                 <p className="mt-4 max-w-2xl text-md text-gray-500 xl:mx-auto">A NFT Display Card</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div className='mt-10 md:flex text-center'>
+                        <div className='md:w-1/2 hover:scale-105 transition-all'>
+                            <a target="_blank" rel="noreferrer" href="https://theredcandyy.github.io/frontendmentor_solutions/advice-generator-app-main/index.html">
+                                <center><img src={adviceGenerator} alt="Advice Generator" className='h-72'/></center>
+                                <p className="mt-4 max-w-2xl text-md text-gray-500 xl:mx-auto">An Advice Generator</p>
+                            </a>
+                        </div>
+                        <div className='md:w-1/2 mt-10 md:mt-0 hover:scale-105 transition-all'>
+                            <a target="_blank" rel="noreferrer" href="https://theredcandyy.github.io/giphy-project/">
+                                <center><img src={giphyProject} alt="Giphy Project" className='h-72 '/></center>
+                                <p className="mt-4 max-w-2xl text-md text-gray-500 xl:mx-auto">A Giphy Project</p>
                             </a>
                         </div>
                     </div>
