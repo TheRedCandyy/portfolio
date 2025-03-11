@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Alexandre - Front-end Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-white font-sans custom-cursor">
+    <div id="canvas-container" class="fixed inset-0 -z-10"></div>
+    
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor-container">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+        <div id="trail-container"></div>
+    </div>
+    
+    <header class="container mx-auto py-8 px-4 flex justify-between items-center relative z-10 fade-in" style="animation-delay: 0.2s;">
+        <div class="logo text-2xl font-bold">Alex<span class="text-indigo-500">.</span></div>
+        <nav class="hidden md:block">
+            <ul class="flex space-x-8">
+                <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
+                <li><a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a></li>
+                <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
+                <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="menu-btn" class="md:hidden">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-900 bg-opacity-95 z-50 hidden flex flex-col justify-center items-center glass-card">
+        <button id="close-menu" class="absolute top-8 right-8">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <ul class="text-center space-y-8 text-2xl">
+            <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
+            <li><a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a></li>
+            <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
+            <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="md:h-[calc(100vh-70px)] min-h-screen flex flex-col items-center justify-center relative">
+            <div class="container mx-auto px-4 py-12 text-center md:text-left md:flex md:items-center md:justify-between flex-1">
+                <div class="md:w-1/2 mb-12 md:mb-0 fade-in" style="animation-delay: 0.4s;">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                        Hello, I'm <span class="text-indigo-500">Alexandre</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-indigo-200 mb-6">
+                        <span id="typed-text" class="inline-block"></span>
+                        <span class="cursor-blink">|</span>
+                    </h2>
+                    <p class="text-lg text-indigo-200 mb-4 max-w-lg mx-auto md:mx-0 typewriter-text opacity-0">
+                        Passionate about technology, programming, and innovation, creating amazing web experiences for <b><span id="yearsExperience">3</span></b> years.
+                    </p>
+                    <p class="text-lg text-indigo-200 mb-2 max-w-lg mx-auto md:mx-0 typewriter-text opacity-0">
+                        Currently working as a <b>Front-end Developer</b> at <b>VML</b>.
+                    </p>
+                    <p class="text-lg text-indigo-200 mb-8 max-w-lg mx-auto md:mx-0 typewriter-text opacity-0">
+                        Also building <b>Punctual Booking</b>.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start typewriter-text opacity-0">
+                        <a href="#contact" class="cta-button bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full transition-colors">
+                            Contact Me
+                        </a>
+                        <a href="#projects" class="border border-white hover:border-indigo-500 hover:text-indigo-500 py-3 px-8 rounded-full transition-colors backdrop-blur-sm">
+                            View Projects
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center fade-in" style="animation-delay: 0.6s;">
+                    <div class="relative h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 bg-indigo-500 rounded-full overflow-hidden shadow-lg animate-float">
+                        <!-- Profile Image with Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/50 to-transparent mix-blend-overlay"></div>
+                        <img src="./assets/images/pfp.jpg" alt="Alexandre" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="w-full flex justify-center mb-10">
+                <a href="#about" class="text-indigo-400 hover:text-white animate-bounce">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gradient-to-b from-slate-900 to-indigo-950">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center fade-in">About Me</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6 md:sticky md:top-20 sticky-column">
+                        <div class="glass-card p-6 hover:shadow-lg transition-all hover:-translate-y-1 fade-in" style="animation-delay: 0.2s;">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-user text-indigo-500 mr-3"></i>
+                                Who I Am
+                            </h3>
+                            <p class="text-indigo-200">
+                                I'm Alexandre, or Alex for short. I'm a front-end developer based in the Lisbon area, Portugal. I'm <span id="age">21</span> years old and started programming when I was just 14 years old.
+                            </p>
+                        </div>
+                        <div class="glass-card p-6 hover:shadow-lg transition-all hover:-translate-y-1 fade-in" style="animation-delay: 0.4s;">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-laptop-code text-indigo-500 mr-3"></i>
+                                What I Do
+                            </h3>
+                            <p class="text-indigo-200">
+                                I transform ideas into digital interfaces, focusing on creating intuitive and visually appealing user experiences. I've mainly worked with e-commerce throughout my career.
+                            </p>
+                        </div>
+                        <div class="glass-card p-6 hover:shadow-lg transition-all hover:-translate-y-1 fade-in" style="animation-delay: 0.6s;">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-heart text-indigo-500 mr-3"></i>
+                                My Passion
+                            </h3>
+                            <p class="text-indigo-200">
+                                I love helping people solve problems and making the internet a better experience for everyone. Innovation and new technologies are what motivate me daily.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="relative z-10 glass-card p-6 fade-in" style="animation-delay: 0.8s;">
+                            <h3 class="text-xl font-semibold mb-6 text-center">Professional Experience</h3>
+                            <div class="timeline-container pl-6 space-y-12">
+                                <!-- Timeline items with fade-in animation applied to each -->
+                                <div class="experience-item relative fade-in" style="animation-delay: 0.9s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Front-end Developer</h4>
+                                    <p class="text-indigo-300 mb-3">VML | November 2024 - Present</p>
+                                    <div class="mt-2 text-indigo-100 space-y-2">
+                                        <p>Started working with React JS in a big enterprise
+                                        system with a micro-frontend architecture.</p>
+                                        <p>Worked with a team in an agile environment.</p>
+                                        <p>Did a lot of work around unit tests and adding unit test
+                                        coverage to existing code making sure the business
+                                        requirements are tested correctly.</p>
+                                        <p>Consumed design system components created and
+                                        maintained by the design system team.</p>
+                                        <p>Worked on the project core team fixing issues and
+                                        developing new features for around three months.</p>
+                                        <p>Working currently on a smaller team that takes care of
+                                        the master data of the whole platform and of a file
+                                        manager services with Google Drive integration.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">React</span>
+                                            <span class="tech-tag">TypeScript</span>
+                                            <span class="tech-tag">SCSS</span>
+                                            <span class="tech-tag">Jest</span>
+                                            <span class="tech-tag">React Testing Library</span>
+                                            <span class="tech-tag">Styled Components</span>
+                                            <span class="tech-tag">Module Federation</span>
+                                            <span class="tech-tag">Git</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-item relative fade-in" style="animation-delay: 1s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Associate Front-end Developer</h4>
+                                    <p class="text-indigo-300 mb-3">VML | January 2024 - November 2024</p>
+                                    <div class="mt-2 text-indigo-100 space-y-2">
+                                        <p>Continue working with Salesforce Commerce Cloud</p>
+                                        <p>Worked with a team in an agile environment.</p>
+                                        <p>Developed various functionalities according to business needs.</p>
+                                        <p>Learned everything required to become a Frontend developer, including coding, design patterns, good practices, etc.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">SFCC</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">ISML</span>
+                                            <span class="tech-tag">HTML</span>
+                                            <span class="tech-tag">SCSS</span>
+                                            <span class="tech-tag">Git</span>
+                                            <span class="tech-tag">Amplience</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-item relative fade-in" style="animation-delay: 1.1s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Associate SFCC Developer</h4>
+                                    <p class="text-indigo-300 mb-3">VML | April <span id="startYearDynamic">2022</span> - January 2024</p>
+                                    <div class="mt-2 text-indigo-100 space-y-2">
+                                        <p>Learned Salesforce Commerce Cloud</p>
+                                        <p>Learned e-commerce business requirements.</p>
+                                        <p>Worked with a team in an agile environment.</p>
+                                        <p>Developed various functionalities according to business needs.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">SFCC</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">Node.JS</span>
+                                            <span class="tech-tag">ISML</span>
+                                            <span class="tech-tag">HTML</span>
+                                            <span class="tech-tag">SCSS</span>
+                                            <span class="tech-tag">Git</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-item relative fade-in" style="animation-delay: 1.2s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Internship as Salesforce Developer</h4>
+                                    <p class="text-indigo-300 mb-3">BNT Consulting | January 2022 - March 2022</p>
+                                    <div class="mt-2 text-indigo-100 space-y-2">
+                                        <p>Learned the Salesforce technology.</p>
+                                        <p>Developed applications using Salesforce.</p>
+                                        <p>Developed an artist's porfolio using web technologies.</p>
+                                        <p>Designed a butcher's online shop.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">Salesforce</span>
+                                            <span class="tech-tag">Apex</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">HTML</span>
+                                            <span class="tech-tag">CSS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-item relative fade-in" style="animation-delay: 1.3s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Freelance</h4>
+                                    <p class="text-indigo-300 mb-3">Personal Projects & Small Projects | October 2019 - October 2020</p>
+                                    <div class="mt-2 text-indigo-100 space-y-2">
+                                        <p>Developed websites using web technologies.</p>
+                                        <p>Close interaction with the client for a great understanding of the requirements.</p>
+                                        <p>Managed databases.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">Laravel</span>
+                                            <span class="tech-tag">PHP</span>
+                                            <span class="tech-tag">MySQL</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">HTML</span>
+                                            <span class="tech-tag">CSS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="experience-item relative fade-in" style="animation-delay: 1.4s;">
+                                    <div class="timeline-dot"></div>
+                                    <h4 class="text-lg font-medium">Beginning of the Journey</h4>
+                                    <p class="text-indigo-300 mb-3">Personal Projects & School | <span id="startCodingYear">2015</span></p>
+                                    <div class="mt-2 text-indigo-100">
+                                        <p>I started learning programming at 14 years old, developing personal projects and exploring different technologies while I was in school.</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm font-medium text-indigo-400 mb-2">Technologies used:</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="tech-tag">PHP</span>
+                                            <span class="tech-tag">MySQL</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">HTML</span>
+                                            <span class="tech-tag">CSS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 bg-gradient-to-b from-indigo-950 to-slate-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Technical Skills</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- Each skill card now has fade-in with incremental delays -->
+                    <div class="skill-card fade-in" style="animation-delay: 0.2s;">
+                        <i class="fab fa-html5 text-5xl mb-4 text-orange-500"></i>
+                        <h3>HTML</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.3s;">
+                        <i class="fab fa-css3-alt text-5xl mb-4 text-blue-500"></i>
+                        <h3>CSS</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.4s;">
+                        <i class="fab fa-js text-5xl mb-4 text-yellow-500"></i>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.5s;">
+                        <i class="fab fa-react text-5xl mb-4 text-cyan-400"></i>
+                        <h3>React</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.6s;">
+                        <i class="fab fa-node-js text-5xl mb-4 text-green-500"></i>
+                        <h3>Node.js</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.7s;">
+                        <i class="fab fa-laravel text-5xl mb-4 text-red-500"></i>
+                        <h3>Laravel</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.8s;">
+                        <i class="fab fa-salesforce text-5xl mb-4 text-blue-600"></i>
+                        <h3>SFCC</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 0.9s;">
+                        <svg class="tech-icon mb-4" viewBox="0 0 64 64" width="80" height="80">
+                            <path fill="#38BDF8" d="M32 16.3c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.653C35.744 29.39 38.808 32.5 45.5 32.5c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C41.756 19.41 38.692 16.3 32 16.3zM18.5 32.5c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.514 3.522 2.004 5.147 3.653C22.244 45.59 25.308 48.7 32 48.7c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.653C28.256 35.61 25.192 32.5 18.5 32.5z"/>
+                        </svg>
+                        <h3>Tailwind</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 1s;">
+                        <i class="fas fa-database text-5xl mb-4 text-sky-600"></i>
+                        <h3>MySQL</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 1.1s;">
+                        <i class="fab fa-github text-5xl mb-4"></i>
+                        <h3>Git</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 1.2s;">
+                        <i class="fab fa-npm text-5xl mb-4 text-red-500"></i>
+                        <h3>npm</h3>
+                    </div>
+                    <div class="skill-card fade-in" style="animation-delay: 1.3s;">
+                        <svg class="tech-icon" viewBox="0 0 24 24" width="80" height="80">
+                            <path fill="#3178C6" d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
+                        </svg>
+                        <h3>TypeScript</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-gradient-to-b from-slate-900 to-indigo-950">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project cards with modern-card class -->
+                    <div class="modern-card overflow-hidden hover:shadow-xl fade-in" style="animation-delay: 0.3s;">
+                        <div class="h-48 bg-indigo-700/50 flex items-center justify-center backdrop-blur-sm">
+                            <img src="./assets/images/punctual-booking-app.png" alt="Punctual Booking" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Punctual Booking</h3>
+                            <p class="text-indigo-200 mb-4">
+                                While I'm still building this, you can check some of the work I've done so far on the demo link bellow.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">Zustand</span>
+                                <span class="tech-tag">Shadcn UI</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a target="_blank" href="https://punctual-booking-fe.vercel.app/" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Demo
+                                </a>
+                                <a target="_blank" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modern-card overflow-hidden hover:shadow-xl fade-in" style="animation-delay: 0.4s;">
+                        <div class="h-48 bg-indigo-700/50 flex items-center justify-center backdrop-blur-sm">
+                            <img src="https://github.com/TheRedCandyy/frontendmentor_solutions/blob/main/tip-calculator-app-main/design/desktop-preview.jpg?raw=true" alt="Tip Calculator App" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Tip Calculator App</h3>
+                            <p class="text-indigo-200 mb-4">
+                                A small training project to practice my skills with HTML, JavaScript and CSS.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">CSS</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a target="_blank" href="https://theredcandyy.github.io/frontendmentor_solutions/tip-calculator-app-main/index.html" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Demo
+                                </a>
+                                <a target="_blank" href="https://github.com/TheRedCandyy/frontendmentor_solutions/tree/main/tip-calculator-app-main" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modern-card overflow-hidden hover:shadow-xl fade-in" style="animation-delay: 0.5s;">
+                        <div class="h-48 bg-indigo-700/50 flex items-center justify-center backdrop-blur-sm">
+                            <img src="./assets/images/giphy-project-app.png" alt="Giphy Finder" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Giphy Finder</h3>
+                            <p class="text-indigo-200 mb-4">
+                                A training project to practice my skills with HTML, JavaScript and SASS. Integrated with giphy API to fetch gifs.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">SASS</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a target="_blank" href="https://theredcandyy.github.io/giphy-project/" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Demo
+                                </a>
+                                <a target="_blank" href="https://github.com/TheRedCandyy/giphy-project" class="text-indigo-400 hover:text-indigo-300 flex items-center">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gradient-to-b from-indigo-950 to-slate-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center fade-in">Let's Talk</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+                    <div class="space-y-8 fade-in" style="animation-delay: 0.3s;">
+                        <h3 class="text-2xl font-semibold">Get in Touch</h3>
+                        <p class="text-indigo-200">
+                            I'm interested in freelance opportunities and interesting projects. If you have a question or just want to say hello, don't hesitate to contact me!
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-xl text-indigo-500 w-8"></i>
+                                <span>Lisbon, Portugal</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-xl text-indigo-500 w-8"></i>
+                                <span>prodalexandretavares@gmail.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-xl text-indigo-500 w-8"></i>
+                                <span>+351 966 905 699</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-6 pt-4">
+                            <a href="https://github.com/TheRedCandyy" class="text-2xl text-indigo-300 hover:text-indigo-500 transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/alexandre-tavares-15082a194/" class="text-2xl text-indigo-300 hover:text-indigo-500 transition-colors">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fade-in" style="animation-delay: 0.5s;">
+                        <form class="space-y-6 glass-card p-8" action="https://formspree.io/f/mgvaeybg" method="POST">
+                            <div>
+                                <label for="name" class="block mb-2 text-indigo-200">Name</label>
+                                <input type="text" id="name" name="name" class="input-field" placeholder="Your name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 text-indigo-200">Email</label>
+                                <input type="email" id="email" name="email" class="input-field" placeholder="Your email" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block mb-2 text-indigo-200">Message</label>
+                                <textarea id="message" name="message" rows="5" class="input-field" placeholder="Your message" required></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="Nova mensagem do Portfolio!">
+                            <button type="submit" class="cta-button bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full transition-colors w-full">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gradient-to-r from-slate-900 to-indigo-950 py-8">
+        <div class="container mx-auto px-4 text-center fade-in">
+            <p class="text-indigo-300">© <span id="currentYear">2023</span> Alexandre. All rights reserved.</p>
+            <p class="text-indigo-400 mt-2">Developed with <i class="fas fa-heart text-red-500"></i> using HTML, CSS, JavaScript and Three.js</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- Script to enable fade-in animation on scroll -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+            
+            // Typewriter effect
+            const typedTextElement = document.getElementById('typed-text');
+            const textPhrases = [
+                'Front-end Developer',
+                'React Specialist',
+                'UI/UX Enthusiast',
+                'Problem Solver'
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typeSpeed = 100;
+            
+            function typeWriter() {
+                const currentPhrase = textPhrases[phraseIndex];
+                
+                if (isDeleting) {
+                    // Removing characters
+                    typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeSpeed = 50; // Faster when deleting
+                } else {
+                    // Adding characters
+                    typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                    typeSpeed = 100; // Normal typing speed
+                }
+                
+                // If completed typing the current phrase
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    typeSpeed = 1500; // Pause at the end of the phrase
+                }
+                
+                // If completed deleting the current phrase
+                if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % textPhrases.length;
+                    typeSpeed = 500; // Pause before starting new phrase
+                }
+                
+                setTimeout(typeWriter, typeSpeed);
+            }
+            
+            // Start the typing effect
+            setTimeout(typeWriter, 1000);
+            
+            // Fade in paragraphs sequentially
+            const paragraphs = document.querySelectorAll('.typewriter-text');
+            paragraphs.forEach((para, index) => {
+                setTimeout(() => {
+                    para.style.opacity = '1';
+                    para.style.transition = 'opacity 0.8s ease';
+                }, 2500 + (index * 600)); // Start after main typing effect has run for a bit
+            });
+            
+            // Custom cursor logic
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const trailContainer = document.getElementById('trail-container');
+            const trailElements = [];
+            const maxTrailElements = 8; // Number of trail elements
+            
+            // Create trail elements
+            for (let i = 0; i < maxTrailElements; i++) {
+                const trail = document.createElement('div');
+                trail.classList.add('cursor-trail');
+                trail.style.opacity = 1 - (i / maxTrailElements); // Fading trail
+                trailContainer.appendChild(trail);
+                trailElements.push(trail);
+            }
+            
+            // Update cursor position
+            function updateCursorPosition(e) {
+                // Main cursor dot
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                
+                // Delayed cursor outline with smoother animation
+                setTimeout(() => {
+                    cursorOutline.style.left = `${e.clientX}px`;
+                    cursorOutline.style.top = `${e.clientY}px`;
+                }, 50);
+                
+                // Update trail positions with increasing delay
+                trailElements.forEach((trail, index) => {
+                    setTimeout(() => {
+                        trail.style.left = `${e.clientX}px`;
+                        trail.style.top = `${e.clientY}px`;
+                    }, 70 + (index * 20));
+                });
+            }
+            
+            // Handle element hover state changes
+            function handleHoverElements() {
+                const hoverElements = document.querySelectorAll('a, button, .skill-card, .modern-card, .cta-button, .tech-tag, input, textarea');
+                
+                hoverElements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                        cursorOutline.style.borderColor = 'white';
+                    });
+                    
+                    element.addEventListener('mouseleave', () => {
+                        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursorOutline.style.borderColor = 'var(--primary)';
+                    });
+                });
+            }
+            
+            // Check if it's a touch device
+            function isTouchDevice() {
+                return (('ontouchstart' in window) ||
+                        (navigator.maxTouchPoints > 0) ||
+                        (navigator.msMaxTouchPoints > 0));
+            }
+            
+            // Only enable custom cursor on non-touch devices
+            if (!isTouchDevice()) {
+                document.addEventListener('mousemove', updateCursorPosition);
+                handleHoverElements();
+                
+                // Make sure cursor is visible when entering the window
+                document.addEventListener('mouseenter', () => {
+                    cursorDot.style.opacity = '1';
+                    cursorOutline.style.opacity = '0.5';
+                    trailElements.forEach(trail => {
+                        trail.style.opacity = '0.3';
+                    });
+                });
+                
+                // Hide cursor when leaving the window
+                document.addEventListener('mouseleave', () => {
+                    cursorDot.style.opacity = '0';
+                    cursorOutline.style.opacity = '0';
+                    trailElements.forEach(trail => {
+                        trail.style.opacity = '0';
+                    });
+                });
+                
+                // Add click animation
+                document.addEventListener('mousedown', () => {
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(0.7)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(0.7)';
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            } else {
+                // Remove custom cursor class for touch devices
+                document.body.classList.remove('custom-cursor');
+            }
+
+            // Tratamento do formulário de contacto
+            const contactForm = document.querySelector('form[action*="formspree"]');
+            const formSubmitButton = contactForm.querySelector('button[type="submit"]');
+            
+            contactForm.addEventListener('submit', function(e) {
+                // Mostrar estado de carregamento no botão
+                formSubmitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> A enviar...';
+                formSubmitButton.disabled = true;
+                
+                // Não é necessário preventDefault() pois queremos que o formulário seja processado normalmente pelo Formspree
+                
+                // Adicionar ouvinte para quando o usuário retornar do Formspree (após redireccionamento)
+                if (window.location.search.includes('?submitted=true')) {
+                    const formSection = document.getElementById('contact');
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'glass-card p-6 text-center text-indigo-200 mt-4';
+                    successMessage.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl mb-3"></i><p>A sua mensagem foi enviada com sucesso! Obrigado pelo contacto.</p>';
+                    
+                    // Substituir o formulário pela mensagem de sucesso
+                    contactForm.parentNode.replaceChild(successMessage, contactForm);
+                    
+                    // Limpar o parâmetro da URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .cursor-blink {
+            font-weight: 700;
+            color: #818cf8; /* indigo-400 */
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Ajustes para dispositivos móveis */
+        @media screen and (max-width: 767px) {
+            /* Melhorar a nitidez do texto */
+            body {
+                -webkit-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+            }
+            
+            /* Aumentar levemente o tamanho das fontes pequenas para evitar texto muito fino */
+            .text-sm, .text-xs {
+                font-weight: 400; /* Ligeiramente mais negrito */
+            }
+            
+            /* Pixel snap para melhorar nitidez */
+            * {
+                transform: translateZ(0);
+            }
+            
+            /* Garantir que o texto não está embaçado durante animações em elementos visíveis */
+            .fade-in.animated {
+                will-change: transform, opacity;
+            }
+        }
+    </style>
+</body>
+</html> 
