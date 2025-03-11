@@ -37,16 +37,19 @@
         </button>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-slate-900 bg-opacity-95 z-50 hidden flex flex-col justify-center items-center glass-card">
-        <button id="close-menu" class="absolute top-8 right-8">
-            <i class="fas fa-times text-2xl"></i>
-        </button>
-        <ul class="text-center space-y-8 text-2xl">
-            <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
-            <li><a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a></li>
-            <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
-            <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
-        </ul>
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-900 bg-opacity-95 z-50 hidden glass-card">
+        <div class="h-screen w-full flex flex-col justify-center items-center">
+            <button id="close-menu" class="absolute top-8 right-8">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-8 text-indigo-300">Menu</h3>
+            <ul class="text-center space-y-8 text-2xl">
+                <li><a href="#about" class="hover:text-indigo-400 transition-colors">About</a></li>
+                <li><a href="#skills" class="hover:text-indigo-400 transition-colors">Skills</a></li>
+                <li><a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a></li>
+                <li><a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+            </ul>
+        </div>
     </div>
 
     <main>
@@ -55,7 +58,7 @@
             <div class="container mx-auto px-4 py-12 text-center md:text-left md:flex md:items-center md:justify-between flex-1">
                 <div class="md:w-1/2 mb-12 md:mb-0 fade-in" style="animation-delay: 0.4s;">
                     <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                        Hello, I'm <span class="text-indigo-500">Alexandre</span>
+                        Hello, I'm <span class="text-indigo-500">Alexandre</span> 👋
                     </h1>
                     <h2 class="text-2xl md:text-3xl text-indigo-200 mb-6">
                         <span id="typed-text" class="inline-block"></span>
@@ -501,6 +504,48 @@
     <!-- Script to enable fade-in animation on scroll -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar funcionalidade ao menu mobile
+            const menuBtn = document.getElementById('menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            
+            // Impedir scroll quando o menu está aberto
+            function toggleBodyScroll(isOpen) {
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            }
+            
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+                // Permitir que a transição CSS seja aplicada
+                setTimeout(() => {
+                    mobileMenu.classList.add('visible');
+                }, 10);
+                toggleBodyScroll(true);
+            });
+            
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('visible');
+                // Esperar a transição terminar antes de esconder
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    toggleBodyScroll(false);
+                }, 300);
+            });
+            
+            // Fechar menu ao clicar em um link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('visible');
+                    // Esperar a transição terminar antes de esconder
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        toggleBodyScroll(false);
+                    }, 300);
+                });
+            });
+            
+            // Animações de fade-in
             const fadeElements = document.querySelectorAll('.fade-in');
             
             const observer = new IntersectionObserver((entries) => {
@@ -699,6 +744,15 @@
                     window.history.replaceState({}, document.title, window.location.pathname);
                 }
             });
+
+            // Mantendo apenas o emoji no título, com cuidado para não afetar a animação de digitação
+            const mainHeading = document.querySelector('h1');
+            if (mainHeading && !mainHeading.querySelector('#typed-text')) {
+                const waveEmoji = mainHeading.innerHTML.match(/👋/);
+                if (waveEmoji) {
+                    mainHeading.innerHTML = mainHeading.innerHTML.replace(/👋/, '<span class="emoji">👋</span>');
+                }
+            }
         });
     </script>
     
@@ -736,6 +790,30 @@
             .fade-in.animated {
                 will-change: transform, opacity;
             }
+        }
+
+        /* Efeito de pulsar apenas para o emoji de aceno */
+        h1 span.emoji {
+            display: inline-block;
+            animation: pulseEmoji 2s infinite;
+        }
+
+        @keyframes pulseEmoji {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Transição do menu móvel */
+        #mobile-menu {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        #mobile-menu.visible {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </body>
